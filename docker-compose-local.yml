@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+
+  keycloak:
+    container_name: keycloak-workout
+    image: quay.io/keycloak/keycloak:16.1.0
+    command: -Dkeycloak.profile.feature.upload_scripts=enabled
+    environment:
+      # VIRTUAL_HOST: auth.dev.komsumdannehaber.com
+      # VIRTUAL_PORT: 8080
+      # LETSENCRYPT_HOST: auth.dev.komsumdannehaber.com
+      # LETSENCRYPT_EMAIL: sessevmezbugra@gmail.com
+      # PROXY_ADDRESS_FORWARDING: "true"
+      # JDBC_PARAMS: "ssl=false" 
+      DB_VENDOR: MYSQL
+      DB_ADDR: host.docker.internal
+      DB_DATABASE: keycloak
+      DB_USER: root
+      DB_PASSWORD: Hilal.2908
+      # KEYCLOAK_HTTP_PORT: 8080
+      # KEYCLOAK_HOSTNAME: auth.arcloudfactories.com
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "connectTimeout=30000"
+    ports:
+      - 8090:8080
+    # depends_on:
+      # - keycloak-database
+      # - nginx-proxy
+      # - geography-database #keycloak-database olarak degistirilecek
+
+# Volumes
+# volumes:
+#   database-volume:
+#   conf:
+#   vhost:
+#   html:
+#   dhparam:
+#   certs:
+#   acme:
+
+#networks:
+#  default:
+#    external:
+#      name: webproxy

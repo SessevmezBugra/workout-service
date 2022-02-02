@@ -1,0 +1,123 @@
+version: '3.9'
+
+services:
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: always
+    privileged: true
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-proxy-le
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+
+  workout-service:
+    container_name: workout-service
+    image: bsessevmez/workout-service:latest
+    build:
+      context: workout-service
+      dockerfile: Dockerfile
+    environment:
+      VIRTUAL_HOST: service.dev.komsumdannehaber.com
+      VIRTUAL_PORT: 8080
+      LETSENCRYPT_HOST: service.dev.komsumdannehaber.com
+      LETSENCRYPT_EMAIL: sessevmezbugra@gmail.com
+      RDS_HOSTNAME: $WORKOUT_DB_HOSTNAME
+      RDS_PORT: $WORKOUT_DB_PORT
+      RDS_DB_NAME: $WORKOUT_DB_NAME
+      RDS_USERNAME: $WORKOUT_DB_USERNAME
+      RDS_PASSWORD: $WORKOUT_DB_PASSWORD
+      KEYCLOAK_URI: $KEYCLOAK_URI
+      CLIENT_SECRET: $WORKOUT_CLIENT_SECRET
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+    ports:
+      - "8080:8080"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+    restart: always
+    depends_on:
+      - nginx-proxy
+      - workout-database
+
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      VIRTUAL_HOST: auth.dev.komsumdannehaber.com
+      VIRTUAL_PORT: 8090
+      LETSENCRYPT_HOST: auth.dev.komsumdannehaber.com
+      LETSENCRYPT_EMAIL: sessevmezbugra@gmail.com
+      PROXY_ADDRESS_FORWARDING: "true"
+      # JDBC_PARAMS: "ssl=false" 
+      DB_VENDOR: MYSQL
+      DB_ADDR: $KEYCLOAK_DB_HOSTNAME
+      DB_DATABASE: $KEYCLOAK_DB_NAME
+      DB_USER: $KEYCLOAK_DB_USERNAME
+      DB_PASSWORD: $KEYCLOAK_DB_PASSWORD
+      KEYCLOAK_HTTP_PORT: 8090
+      KEYCLOAK_HOSTNAME: auth.dev.komsumdannehaber.com
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_FRONTEND_URL: auth.dev.komsumdannehaber.com
+      KEYCLOAK_STATISTICS: all
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "connectTimeout=30000"
+    ports:
+      - 8090:8080
+    depends_on:
+      # - keycloak-database
+      - nginx-proxy
+      - workout-database #keycloak-database olarak degistirilecek
+
+  workout-database:
+    container_name: workout-database
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: $WORKOUT_DB_PASSWORD
+      MYSQL_USER: $WORKOUT_DB_USERNAME
+      MYSQL_PASSWORD: $WORKOUT_DB_PASSWORD
+      MYSQL_DATABASE: $WORKOUT_DB_NAME
+    ports:
+      - "${WORKOUT_DB_EXPOSED_PORT}:3306"
+    restart: always
+    volumes:
+      - /var/lib/mysql-volume:/var/lib/mysql
+
+
+# Volumes
+volumes:
+  database-volume:
+  conf:
+  vhost:
+  html:
+  dhparam:
+  certs:
+  acme:
+
+
+networks:
+  default:
+    external:
+      name: webproxy
