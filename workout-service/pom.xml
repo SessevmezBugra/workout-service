@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.workout</groupId>
-	<artifactId>workout</artifactId>
+	<artifactId>workout-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>WorkoutMonolotic</name>
 	<description>Workout Project Monolotic</description>
