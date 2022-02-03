@@ -36,9 +36,9 @@ services:
       context: workout-service
       dockerfile: Dockerfile
     environment:
-      VIRTUAL_HOST: service.dev.komsumdannehaber.com
+      VIRTUAL_HOST: service.gym4athletes.com
       VIRTUAL_PORT: 8080
-      LETSENCRYPT_HOST: service.dev.komsumdannehaber.com
+      LETSENCRYPT_HOST: service.gym4athletes.com
       LETSENCRYPT_EMAIL: sessevmezbugra@gmail.com
       RDS_HOSTNAME: $WORKOUT_DB_HOSTNAME
       RDS_PORT: $WORKOUT_DB_PORT
@@ -65,9 +65,9 @@ services:
     container_name: keycloak
     image: quay.io/keycloak/keycloak:latest
     environment:
-      VIRTUAL_HOST: auth.dev.komsumdannehaber.com
+      VIRTUAL_HOST: auth.gym4athletes.com
       VIRTUAL_PORT: 8090
-      LETSENCRYPT_HOST: auth.dev.komsumdannehaber.com
+      LETSENCRYPT_HOST: auth.gym4athletes.com
       LETSENCRYPT_EMAIL: sessevmezbugra@gmail.com
       PROXY_ADDRESS_FORWARDING: "true"
       # JDBC_PARAMS: "ssl=false" 
@@ -77,10 +77,10 @@ services:
       DB_USER: $KEYCLOAK_DB_USERNAME
       DB_PASSWORD: $KEYCLOAK_DB_PASSWORD
       KEYCLOAK_HTTP_PORT: 8090
-      KEYCLOAK_HOSTNAME: auth.dev.komsumdannehaber.com
+      KEYCLOAK_HOSTNAME: auth.gym4athletes.com
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
-      KEYCLOAK_FRONTEND_URL: auth.dev.komsumdannehaber.com
+      KEYCLOAK_FRONTEND_URL: auth.gym4athletes.com
       KEYCLOAK_STATISTICS: all
       # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
       #JDBC_PARAMS: "connectTimeout=30000"
