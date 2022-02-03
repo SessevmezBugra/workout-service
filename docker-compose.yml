@@ -37,7 +37,7 @@ services:
       dockerfile: Dockerfile
     environment:
       VIRTUAL_HOST: service.gym4athletes.com
-      VIRTUAL_PORT: 8080
+      VIRTUAL_PORT: 8091
       LETSENCRYPT_HOST: service.gym4athletes.com
       LETSENCRYPT_EMAIL: sessevmezbugra@gmail.com
       RDS_HOSTNAME: $WORKOUT_DB_HOSTNAME
@@ -52,7 +52,7 @@ services:
         limits:
           memory: 500M
     ports:
-      - "8080:8080"
+      - "8091:8080"
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
