@@ -2,7 +2,7 @@ package com.workout.enums;
 
 public enum UserStatus {
 
-	INVETED,
+	INVITED,
 	ACTIVE,
 	DELETED
 }
