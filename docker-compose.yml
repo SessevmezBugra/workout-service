@@ -47,10 +47,10 @@ services:
       RDS_PASSWORD: $WORKOUT_DB_PASSWORD
       KEYCLOAK_URI: $KEYCLOAK_URI
       CLIENT_SECRET: $WORKOUT_CLIENT_SECRET
-    deploy:
-      resources:
-        limits:
-          memory: 500M
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 500M
     ports:
       - "8091:8080"
     labels:
