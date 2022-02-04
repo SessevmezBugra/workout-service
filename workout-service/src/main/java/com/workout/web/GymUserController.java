@@ -54,14 +54,14 @@ public class GymUserController {
 				Optional<GymUserEntity> foundEntity = gymUserService.findByGymIdAndUserId(gymId, uId);
 				foundEntity.ifPresentOrElse((gymUser) -> {
 					gymUser.setRole(userRole);
-					gymUser.setStatus(UserStatus.INVETED);
+					gymUser.setStatus(UserStatus.INVITED);
 					gymUserService.update(gymUser);
 				}, () -> {
 					UserRepresentation foundUserRepresentation = keycloakUserService.findByUserId(uId);
 					GymEntity foundGym = gymService.findById(gymId);
 					GymUserEntity gymUserEntity = new GymUserEntity();
 					gymUserEntity.setRole(userRole);
-					gymUserEntity.setStatus(UserStatus.INVETED);
+					gymUserEntity.setStatus(UserStatus.INVITED);
 					gymUserEntity.setUserId(foundUserRepresentation.getId());
 					gymUserEntity.setUsername(foundUserRepresentation.getUsername());
 					gymUserEntity.setGym(foundGym);
