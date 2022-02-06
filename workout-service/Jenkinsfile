@@ -7,8 +7,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker run -i --rm -v "$PWD":/app -v "$HOME/.m2":/root/.m2 -w /app/workout-service maven mvn clean package -DskipTests'
-                sh 'cd workout-service && docker build -t bsessevmez/workout-service:latest .'
+                sh 'docker run -i --rm -v "$PWD":/app -v "$HOME/.m2":/root/.m2 -w /app/training-service maven mvn clean package -DskipTests'
+                sh 'cd training-service && docker build -t bsessevmez/training-service:latest .'
             }
         }
     }

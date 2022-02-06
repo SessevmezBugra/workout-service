@@ -9,11 +9,11 @@
 		<version>2.6.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.workout</groupId>
-	<artifactId>workout-service</artifactId>
+	<groupId>com.training</groupId>
+	<artifactId>training-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>WorkoutMonolotic</name>
-	<description>Workout Project Monolotic</description>
+	<name>TrainingMonolotic</name>
+	<description>Training Project Monolotic</description>
 	<properties>
 		<java.version>11</java.version>
 		<keycloak.version>16.1.0</keycloak.version>
@@ -106,7 +106,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>workout-service</finalName>
+		<finalName>training-service</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

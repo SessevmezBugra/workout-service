@@ -1,6 +1,6 @@
 spring:
   application:
-    name: workout-service
+    name: training-service
   datasource:
     hikari:
       minimumIdle: 2
@@ -8,7 +8,7 @@ spring:
       idleTimeout: 120000
       connectionTimeout: 300000
       leakDetectionThreshold: 300000
-    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/${RDS_DB_NAME:workoutmonolotic}?serverTimezone=UTC
+    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/${RDS_DB_NAME:trainingmonolotic}?serverTimezone=UTC
     username: ${RDS_USERNAME:root}
     password: ${RDS_PASSWORD:Hilal.2908}
   jpa:
@@ -57,7 +57,7 @@ springdoc:
   oAuthFlow:
     authorizationUrl: ${KEYCLOAK_URI:http://localhost:8090}/auth/realms/workout/protocol/openid-connect/auth
     tokenUrl: ${KEYCLOAK_URI:http://localhost:8090}/auth/realms/workout/protocol/openid-connect/token
-#    authorizationUrl: ${KEYCLOAK_URI:http://192.168.1.103:8080}/auth/realms/workout/protocol/openid-connect/auth
-#    tokenUrl: ${KEYCLOAK_URI:http://192.168.1.103:8080}/auth/realms/workout/protocol/openid-connect/token
+#    authorizationUrl: ${KEYCLOAK_URI:http://192.168.1.103:8080}/auth/realms/training/protocol/openid-connect/auth
+#    tokenUrl: ${KEYCLOAK_URI:http://192.168.1.103:8080}/auth/realms/training/protocol/openid-connect/token
 #    authorizationUrl: ${KEYCLOAK_URI:http://172.20.10.4:8080}/auth/realms/komsumdannehaber/protocol/openid-connect/auth
 #    tokenUrl: ${KEYCLOAK_URI:http://172.20.10.4:8080}/auth/realms/komsumdannehaber/protocol/openid-connect/token
