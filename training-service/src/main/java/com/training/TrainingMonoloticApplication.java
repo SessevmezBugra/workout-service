@@ -9,10 +9,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
 @SpringBootApplication
-public class WorkoutMonoloticApplication {
+public class TrainingMonoloticApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WorkoutMonoloticApplication.class, args);
+		SpringApplication.run(TrainingMonoloticApplication.class, args);
 	}
 	
 	@Bean

@@ -27,13 +27,13 @@ keycloak-admin-user: admin
 keycloak-admin-password: admin
 
 keycloak:
-  resource: workout-service
+  resource: training-service
   credentials: 
     secret: ${CLIENT_SECRET:frnncIYfr5GjotXIKjOjaQebB7potTCL}
 #  auth-server-url: ${KEYCLOAK_URI:https://auth.dev.komsumdannehaber.com}/aut
   auth-server-url: ${KEYCLOAK_URI:http://localhost:8090}/auth
 #  auth-server-url: ${KEYCLOAK_URI:http://192.168.1.103:8080}/auth
-  realm: workout
+  realm: training
   bearer-only: true
   public-client: true
   principal-attribute: preferred_username
@@ -51,12 +51,12 @@ management:
 springdoc:
   swagger-ui:
     oauth:
-      clientId: workout-service
+      clientId: training-service
       clientSecret: ${CLIENT_SECRET:frnncIYfr5GjotXIKjOjaQebB7potTCL}
       usePkceWithAuthorizationCodeGrant: true
   oAuthFlow:
-    authorizationUrl: ${KEYCLOAK_URI:http://localhost:8090}/auth/realms/workout/protocol/openid-connect/auth
-    tokenUrl: ${KEYCLOAK_URI:http://localhost:8090}/auth/realms/workout/protocol/openid-connect/token
+    authorizationUrl: ${KEYCLOAK_URI:http://localhost:8090}/auth/realms/training/protocol/openid-connect/auth
+    tokenUrl: ${KEYCLOAK_URI:http://localhost:8090}/auth/realms/training/protocol/openid-connect/token
 #    authorizationUrl: ${KEYCLOAK_URI:http://192.168.1.103:8080}/auth/realms/training/protocol/openid-connect/auth
 #    tokenUrl: ${KEYCLOAK_URI:http://192.168.1.103:8080}/auth/realms/training/protocol/openid-connect/token
 #    authorizationUrl: ${KEYCLOAK_URI:http://172.20.10.4:8080}/auth/realms/komsumdannehaber/protocol/openid-connect/auth

@@ -4,9 +4,9 @@ pipeline {
 
     stages {
 
-        stage('workout-service') {
+        stage('training-service') {
             steps {
-                build job: 'workout-service-pipeline', propagate: true, wait: true
+                build job: 'training-service-pipeline', propagate: true, wait: true
             }
         }
 
