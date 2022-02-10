@@ -4,6 +4,8 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.training.enums.GymStatus;
+import com.training.enums.UserRole;
+import com.training.enums.UserStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -36,4 +38,8 @@ public class GymDto {
 	private Date updatedOn;
 	
 	private String updatedBy;
+	
+	private UserRole userRole;
+	
+	private UserStatus userStatus;
 }
